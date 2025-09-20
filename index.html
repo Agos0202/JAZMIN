@@ -57,18 +57,31 @@
       font-size: clamp(14px, 3vw, 18px);
     }
 
-    .screen2 {
-      display: none;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      text-align: center;
-      padding: 4vw 3vw;
-      opacity: 0;
-      transition: opacity 1s ease;
-      background: url("background1.png") no-repeat center top;
-      background-size: cover;
-    }
+ .screen2 {
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 4vw 3vw;
+
+  /* Ocupa siempre toda la pantalla visible */
+  width: 100%;
+  min-height: 100vh;   /* fallback */
+  min-height: 100dvh;  /* altura real en móviles modernos */
+
+  opacity: 0;
+  transition: opacity 1s ease;
+
+  background: url("background1.png") no-repeat top center;
+  background-size: cover;   /* La imagen cubre toda la pantalla */
+  background-attachment: scroll; /* Se mueve con el scroll */
+}
+
+
+
+
+
     .screen2.show { display: flex; opacity: 1; }
 
     /* Corona */
