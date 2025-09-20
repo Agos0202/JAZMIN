@@ -57,31 +57,20 @@
       font-size: clamp(14px, 3vw, 18px);
     }
 
- .screen2 {
-  display: none;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  text-align: center;
-  padding: 4vw 3vw;
-
-  /* Ocupa siempre toda la pantalla visible */
-  width: 100%;
-  min-height: 100vh;   /* fallback */
-  min-height: 100dvh;  /* altura real en móviles modernos */
-
-  opacity: 0;
-  transition: opacity 1s ease;
-
-  background: url("background1.png") no-repeat top center;
-  background-size: cover;   /* La imagen cubre toda la pantalla */
-  background-attachment: scroll; /* Se mueve con el scroll */
-}
-
-
-
-
-
+    .screen2 {
+      display: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding: 4vw 3vw;
+      width: 100%;
+      min-height: 100dvh;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background: url("background1.png") no-repeat top center;
+      background-size: cover;
+    }
     .screen2.show { display: flex; opacity: 1; }
 
     /* Corona */
@@ -90,35 +79,37 @@
       margin: -10px auto 0;
       display: block;
     }
-    h3{font-size: 40px;
+
+    /* Títulos */
+    h3 {
+      font-size: 40px;
       color: #e78fac;
       text-align: center;
-
     }
-   h4{font-size: 30px;
+    h4 {
+      font-size: 30px;
       color: #d37393;
       text-align: center;
-     margin: 5PX;
-   }
-
-    /* Nombre y títulos */
+      margin: 5px;
+    }
     h2, h1 {
       font-family: "Great Vibes", cursive;
       color: #e78fac;
       text-align: center;
     }
-    h2 { font-size: clamp(32px, 10vw, 80px); margin: 0 0 5px; }
-    h1 { font-size: clamp(20px, 6vw, 48px); margin-top: 10px; }
+    h2 { font-size: clamp(32px, 10vw, 80px); margin: 2px 0 0; } /* más pegado a la corona */
+    h1 { font-size: clamp(20px, 6vw, 48px); margin: 5px 0 0; }
 
     /* Texto */
-    p {
+    p, .note {
       color: #7a4b61;
-      margin: 6px auto;
+      margin: 5px auto;
       font-size: clamp(14px, 3.5vw, 18px);
       line-height: 1.4;
-      max-width: 450px;
+      max-width: 340px; /* más angosto */
       text-align: center;
       font-family: "Playfair Display", serif;
+      font-weight: normal;
     }
 
     /* Fecha */
@@ -129,12 +120,11 @@
       gap: clamp(5px, 2vw, 15px);
       font-family: "Playfair Display", serif;
       color: #7a4b61;
-      margin: 12px 0;
+      margin: 10px 0;
       flex-wrap: wrap;
-      max-width: 450px;
+      max-width: 340px;
       width: 100%;
     }
-
     .fecha-calendario .dia-semana,
     .fecha-calendario .hora {
       font-size: clamp(14px, 4vw, 22px);
@@ -142,9 +132,7 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
-
     .fecha-calendario .dia-mes { text-align: center; }
-
     .fecha-calendario .mes {
       display: block;
       font-size: clamp(12px, 3vw, 16px);
@@ -153,14 +141,12 @@
       margin-bottom: 3px;
       text-transform: uppercase;
     }
-
     .fecha-calendario .dia {
       font-size: clamp(26px, 11vw, 60px);
       font-weight: bold;
       color: #c86a8f;
       line-height: 1;
     }
-
     .fecha-calendario .anio {
       display: block;
       font-size: clamp(12px, 3vw, 16px);
@@ -168,7 +154,7 @@
       color: #7a4b61;
     }
 
-    /* Castillos */
+    /* Castillos + dirección */
     .castillos { 
       display: flex; 
       align-items: center; 
@@ -181,11 +167,22 @@
       width: clamp(50px, 18vw, 90px);
       filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
     }
+    .salon {
+      font-size: clamp(14px, 4vw, 18px);
+      font-weight: bold;
+      color: #7a4b61;
+      margin-bottom: 3px;
+    }
+    .direccion {
+      font-size: clamp(12px, 3vw, 16px);
+      color: #7a4b61;
+      margin-top: 0;
+    }
 
     /* Botón */
     .btn, .whatsapp-btn {
       display: inline-block;
-      margin: 15px 0;
+      margin: 12px 0;
       padding: clamp(8px, 2vw, 12px) clamp(14px, 4vw, 22px);
       background: linear-gradient(135deg, #c86a8f, #eaa6c0);
       color: #fff;
@@ -197,32 +194,30 @@
     }
 
     /* Dress code */
-    .dresscode { margin-top: 15px; }
+    .dresscode { margin-top: 10px; }
     .dresscode p { font-weight: bold; margin-bottom: 5px; font-size: clamp(16px, 4vw, 20px); }
     .dress-icons { 
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); 
-      gap: clamp(10px, 4vw, 25px); 
-      justify-items: center; 
-      margin-bottom: 10px; 
+      display: flex;
+      justify-content: center;
+      gap: clamp(8px, 3vw, 15px); /* más juntos */
+      margin-bottom: 3px; /* menos espacio debajo */
     }
     .dress-icons img {
-      width: clamp(50px, 18vw, 90px);
+      width: clamp(50px, 18vw, 80px);
       filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
     }
-    .salon, .note { font-size: clamp(12px, 3vw, 15px); font-style: italic; color: #7a4b61; }
 
     /* Cuenta regresiva */
-    .countdown { margin-top: 8px; font-size: clamp(16px, 4vw, 22px); font-weight: bold; color: #7a4b61; }
+    .countdown { margin-top: 5px; font-size: clamp(16px, 4vw, 22px); font-weight: bold; color: #7a4b61; }
     .time-box { margin-top: 5px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
     .time-box div { text-align: center; }
     .time-box span { display: block; font-size: clamp(18px, 5vw, 26px); font-weight: bold; }
 
     /* Confirmación */
-    .confirm { margin-top: 15px; font-size: clamp(14px, 3.5vw, 17px); }
+    .confirm { margin-top: 12px; font-size: clamp(14px, 3.5vw, 17px); }
     .confirm img {
       width: clamp(50px, 18vw, 70px);
-      margin: 10px auto;
+      margin: 8px auto;
       display: block;
       filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
     }
@@ -230,19 +225,15 @@
     /* Regalo */
     .regalo {
       width: clamp(50px, 18vw, 70px);
-      margin: 10px auto;
+      margin: 8px auto;
       display: block;
       filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
     }
 
     /* Mariposas */
     .butterfly { width: 35px; position: absolute; bottom: -60px; opacity: 0; }
-@keyframes fly-left { 0% { transform: translateY(0) translateX(0) scale(0.8) rotate(0deg); opacity: 1; } 50% { transform: translateY(-250px) translateX(-50px) scale(1) rotate(20deg); opacity: 1; } 100% { transform: translateY(-500px) translateX(-100px) scale(0.9) rotate(-20deg); opacity: 0; } } @keyframes fly-right { 0% { transform: translateY(0) translateX(0) scale(0.8) rotate(0deg); opacity: 1; } 50% { transform: translateY(-250px) translateX(50px) scale(1) rotate(-20deg); opacity: 1; } 100% { transform: translateY(-500px) translateX(100px) scale(0.9) rotate(20deg); opacity: 0; } }
-    @keyframes flyaway {
-      0% { transform: translateY(100px) scale(0.8) rotate(0deg); opacity: 1; }
-      50% { transform: translateY(-50px) scale(1) rotate(20deg); opacity: 1; }
-      100% { transform: translateY(-150px) scale(0.8) rotate(-20deg); opacity: 0; }
-    }
+    @keyframes fly-left { 0% { transform: translateY(0) translateX(0) scale(0.8) rotate(0deg); opacity: 1; } 50% { transform: translateY(-250px) translateX(-50px) scale(1) rotate(20deg); opacity: 1; } 100% { transform: translateY(-500px) translateX(-100px) scale(0.9) rotate(-20deg); opacity: 0; } } 
+    @keyframes fly-right { 0% { transform: translateY(0) translateX(0) scale(0.8) rotate(0deg); opacity: 1; } 50% { transform: translateY(-250px) translateX(50px) scale(1) rotate(-20deg); opacity: 1; } 100% { transform: translateY(-500px) translateX(100px) scale(0.9) rotate(20deg); opacity: 0; } }
   </style>
 </head>
 <body>
@@ -282,10 +273,12 @@
     <!-- Lugar -->
     <div class="castillos">
       <img src="castillo.png" alt="Castillo">
-      <p class="salon">Salón La Estrella</p>
+      <div>
+        <p class="salon">Salón La Estrella</p>
+        <p class="direccion">Av. Torquins 936</p>
+      </div>
       <img src="castillo.png" alt="Castillo">
     </div>
-    <p>Av. Torquins 936</p>
     <a href="https://maps.app.goo.gl/iojpgC5Es2BPZkPT6" target="_blank" class="btn">Ver ubicación</a>
 
     <!-- Dress code -->
@@ -308,14 +301,10 @@
 
     <!-- Regalo -->
     <img src="regalo.png" alt="Regalo" class="regalo">
-    <p style="margin-top:15px;">Lo importante es que me puedas acompañar ese día. Pero si insistís y querés hacerme un regalo, podés hacer un depósito en la siguiente cuenta bancaria.</p>
-    <p style="margin-top:15px;">ALIAS:KARI2488</p>
-    <p style="margin-top:15px;">NOMBRE DE LA CUENTA: KARINA NOEMI ARIAS</p>
+    <p>Lo importante es que me puedas acompañar ese día. Pero si insistís y querés hacerme un regalo, podés hacer un depósito en la siguiente cuenta bancaria.</p>
+    <p>ALIAS: KARI2488</p>
+    <p>NOMBRE DE LA CUENTA: KARINA NOEMI ARIAS</p>
     <h1>¡Te esperamos!</h1>
-    <img src="instagram.png" alt="Regalo" class="regalo">
-  <h4>#XVJAZ</h4>
-  <p style="margin-top:15px;">¡Compartamos juntos este momento!Subi tus fotos y videos usando el hashtag.</p>
-
   </div>
   
   <!-- Música -->
