@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XV JAZMIN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; }
+
+    .screen1, .screen2 {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .screen1 { 
+      flex-direction: column; 
+      background: url("backgroundscreen1.png") no-repeat center top;
+      background-size: cover;
+    }
+
+    .envelope {
+      position: relative;
+      width: clamp(200px, 60vw, 280px);
+      height: clamp(140px, 40vw, 200px);
+      background: #eaa6c0;
+      border: 2px solid #c86a8f;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    }
+    .flap {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 50%;
+      background: #c86a8f;
+      transform-origin: top;
+      transition: transform 1s ease;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+    }
+    .envelope.open .flap { transform: rotateX(180deg); }
+
+    .open-text {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #7a4b61;
+      text-align: center;
+      font-size: clamp(14px, 3vw, 18px);
+    }
+
+    .screen2 {
+      display: none;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      padding: 4vw 3vw;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background: url("background1.png") no-repeat center top;
+      background-size: cover;
+    }
+    .screen2.show { display: flex; opacity: 1; }
+
+    /* Corona */
+    .corona {
+      width: clamp(90px, 25vw, 180px);
+      margin: -10px auto 0;
+      display: block;
+    }
+    h3{font-size: 40px;
+      color: #e78fac;
+      text-align: center;
+
+    }
+   h4{font-size: 30px;
+      color: #d37393;
+      text-align: center;
+     margin: 5PX;
+   }
+
+    /* Nombre y títulos */
+    h2, h1 {
+      font-family: "Great Vibes", cursive;
+      color: #e78fac;
+      text-align: center;
+    }
+    h2 { font-size: clamp(32px, 10vw, 80px); margin: 0 0 5px; }
+    h1 { font-size: clamp(20px, 6vw, 48px); margin-top: 10px; }
+
+    /* Texto */
+    p {
+      color: #7a4b61;
+      margin: 6px auto;
+      font-size: clamp(14px, 3.5vw, 18px);
+      line-height: 1.4;
+      max-width: 450px;
+      text-align: center;
+      font-family: "Playfair Display", serif;
+    }
+
+    /* Fecha */
+    .fecha-calendario {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(5px, 2vw, 15px);
+      font-family: "Playfair Display", serif;
+      color: #7a4b61;
+      margin: 12px 0;
+      flex-wrap: wrap;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    .fecha-calendario .dia-semana,
+    .fecha-calendario .hora {
+      font-size: clamp(14px, 4vw, 22px);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .fecha-calendario .dia-mes { text-align: center; }
+
+    .fecha-calendario .mes {
+      display: block;
+      font-size: clamp(12px, 3vw, 16px);
+      font-weight: bold;
+      color: #c86a8f;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    .fecha-calendario .dia {
+      font-size: clamp(26px, 11vw, 60px);
+      font-weight: bold;
+      color: #c86a8f;
+      line-height: 1;
+    }
+
+    .fecha-calendario .anio {
+      display: block;
+      font-size: clamp(12px, 3vw, 16px);
+      margin-top: 3px;
+      color: #7a4b61;
+    }
+
+    /* Castillos */
+    .castillos { 
+      display: flex; 
+      align-items: center; 
+      gap: clamp(5px, 2vw, 10px); 
+      justify-content: center; 
+      margin-top: 5px; 
+      flex-wrap: wrap;
+    }
+    .castillos img {
+      width: clamp(50px, 18vw, 90px);
+      filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
+    }
+
+    /* Botón */
+    .btn, .whatsapp-btn {
+      display: inline-block;
+      margin: 15px 0;
+      padding: clamp(8px, 2vw, 12px) clamp(14px, 4vw, 22px);
+      background: linear-gradient(135deg, #c86a8f, #eaa6c0);
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: clamp(12px, 3vw, 16px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    /* Dress code */
+    .dresscode { margin-top: 15px; }
+    .dresscode p { font-weight: bold; margin-bottom: 5px; font-size: clamp(16px, 4vw, 20px); }
+    .dress-icons { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); 
+      gap: clamp(10px, 4vw, 25px); 
+      justify-items: center; 
+      margin-bottom: 10px; 
+    }
+    .dress-icons img {
+      width: clamp(50px, 18vw, 90px);
+      filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
+    }
+    .salon, .note { font-size: clamp(12px, 3vw, 15px); font-style: italic; color: #7a4b61; }
+
+    /* Cuenta regresiva */
+    .countdown { margin-top: 8px; font-size: clamp(16px, 4vw, 22px); font-weight: bold; color: #7a4b61; }
+    .time-box { margin-top: 5px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .time-box div { text-align: center; }
+    .time-box span { display: block; font-size: clamp(18px, 5vw, 26px); font-weight: bold; }
+
+    /* Confirmación */
+    .confirm { margin-top: 15px; font-size: clamp(14px, 3.5vw, 17px); }
+    .confirm img {
+      width: clamp(50px, 18vw, 70px);
+      margin: 10px auto;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
+    }
+
+    /* Regalo */
+    .regalo {
+      width: clamp(50px, 18vw, 70px);
+      margin: 10px auto;
+      display: block;
+      filter: brightness(0) saturate(100%) invert(62%) sepia(12%) saturate(1300%) hue-rotate(290deg) brightness(95%) contrast(90%);
+    }
+
+    /* Mariposas */
+    .butterfly { width: 35px; position: absolute; bottom: -60px; opacity: 0; }
+@keyframes fly-left { 0% { transform: translateY(0) translateX(0) scale(0.8) rotate(0deg); opacity: 1; } 50% { transform: translateY(-250px) translateX(-50px) scale(1) rotate(20deg); opacity: 1; } 100% { transform: translateY(-500px) translateX(-100px) scale(0.9) rotate(-20deg); opacity: 0; } } @keyframes fly-right { 0% { transform: translateY(0) translateX(0) scale(0.8) rotate(0deg); opacity: 1; } 50% { transform: translateY(-250px) translateX(50px) scale(1) rotate(-20deg); opacity: 1; } 100% { transform: translateY(-500px) translateX(100px) scale(0.9) rotate(20deg); opacity: 0; } }
+    @keyframes flyaway {
+      0% { transform: translateY(100px) scale(0.8) rotate(0deg); opacity: 1; }
+      50% { transform: translateY(-50px) scale(1) rotate(20deg); opacity: 1; }
+      100% { transform: translateY(-150px) scale(0.8) rotate(-20deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla 1 -->
+  <div class="screen1" id="screen1">
+    <h3>MIS XV</h3>
+    <h2>Jazmín</h2>
+    <div class="envelope" id="envelope"><div class="flap"></div></div>
+    <div class="open-text">Haz click para abrir la invitación</div>
+  </div>
+
+  <!-- Pantalla 2 -->
+  <div class="screen2" id="screen2">
+    <div id="butterflies"></div>
+    <img src="corona.png" class="corona" alt="Corona">
+    <h2>Jazmín</h2>
+
+    <p>Cumplir 15 años y compartirlo con los que amo es una manera de ser feliz 
+    y celebrar estos quince años que me han sido dados para fortalecer los dones que Dios me 
+    dio en todos los actos de mi vida.</p>
+
+    <!-- Fecha -->
+    <div class="fecha-calendario">
+      <span class="dia-semana">VIERNES</span>
+      <div class="dia-mes">
+        <span class="mes">OCT</span>
+        <span class="dia">17</span>
+        <span class="anio">2025</span>
+      </div>
+      <span class="hora">22:00 HS</span>
+    </div>
+
+    <!-- Cuenta regresiva -->
+    <div class="countdown">Falta tan solo...</div>
+    <div class="time-box" id="countdown"></div>
+
+    <!-- Lugar -->
+    <div class="castillos">
+      <img src="castillo.png" alt="Castillo">
+      <p class="salon">Salón La Estrella</p>
+      <img src="castillo.png" alt="Castillo">
+    </div>
+    <p>Av. Torquins 936</p>
+    <a href="https://maps.app.goo.gl/iojpgC5Es2BPZkPT6" target="_blank" class="btn">Ver ubicación</a>
+
+    <!-- Dress code -->
+    <div class="dresscode">
+      <p>DRESS CODE</p>
+      <div class="dress-icons">
+        <img src="CAMISA.png" alt="Camisa">
+        <img src="VESTIDO.png" alt="Vestido">
+      </div>
+      <h1>Elegante</h1>
+      <p class="note">Amablemente, el color rosa es exclusivo para la quinceañera</p>
+    </div>
+
+    <!-- Confirmación -->
+    <div class="confirm">
+      <img src="calendario.png" alt="Calendario">
+      <p>Por favor, confirmá tu asistencia antes del 10 de octubre.</p>
+      <a href="https://wa.me/3815220555?text=Hola%20Jazmín!%20Confirmo%20mi%20asistencia%20a%20tus%2015." target="_blank" class="whatsapp-btn">Confirmar por WhatsApp</a>
+    </div>
+
+    <!-- Regalo -->
+    <img src="regalo.png" alt="Regalo" class="regalo">
+    <p style="margin-top:15px;">Lo importante es que me puedas acompañar ese día. Pero si insistís y querés hacerme un regalo, podés hacer un depósito en la siguiente cuenta bancaria.</p>
+    <p style="margin-top:15px;">ALIAS:KARI2488</p>
+    <p style="margin-top:15px;">NOMBRE DE LA CUENTA: KARINA NOEMI ARIAS</p>
+    <h1>¡Te esperamos!</h1>
+    <img src="instagram.png" alt="Regalo" class="regalo">
+  <h4>#XVJAZ</h4>
+  <p style="margin-top:15px;">¡Compartamos juntos este momento!Subi tus fotos y videos usando el hashtag.</p>
+
+  </div>
+  
+  <!-- Música -->
+  <audio id="music" src="musicaxv.mp3"></audio>
+
+<script>
+  const envelope = document.getElementById('envelope');
+  const screen1 = document.getElementById('screen1');
+  const screen2 = document.getElementById('screen2');
+  const butterfliesContainer = document.getElementById("butterflies");
+  const music = document.getElementById("music");
+
+  envelope.addEventListener('click', () => {
+    envelope.classList.add('open');
+    setTimeout(() => {
+      screen1.style.opacity = "0";
+      setTimeout(() => {
+        screen1.style.display = "none";
+        screen2.classList.add('show');
+        music.play();
+
+        for (let i = 0; i < 30; i++) {
+          let img = document.createElement("img");
+          img.src = "mariposa.png";
+          img.className = "butterfly";
+          img.style.left = `${Math.random() * 90 + 5}%`;
+          img.style.animationDelay = `${Math.random() * 2}s`;
+          img.style.animation = (Math.random() > 0.5 ? "fly-left" : "fly-right") + " 6s ease-in forwards";
+          butterfliesContainer.appendChild(img);
+        }
+        setTimeout(() => { butterfliesContainer.innerHTML = ""; }, 8000);
+      }, 1000);
+    }, 1200);
+  });
+
+  /* Cuenta regresiva */
+  const countdown = document.getElementById("countdown");
+  const eventDate = new Date("October 17, 2025 22:00:00").getTime();
+  setInterval(() => {
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+    if (distance < 0) {
+      countdown.innerHTML = "<span>¡El gran día ha llegado!</span>";
+      return;
+    }
+    const days = Math.floor(distance / (1000*60*60*24));
+    const hours = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+    const seconds = Math.floor((distance % (1000*60))/1000);
+    countdown.innerHTML = ` 
+      <div><span>${days}</span>Días</div>
+      <div><span>${hours}</span>Horas</div>
+      <div><span>${minutes}</span>Minutos</div>
+      <div><span>${seconds}</span>Segundos</div>`;
+  }, 1000);
+</script>
+</body>
+</html>
